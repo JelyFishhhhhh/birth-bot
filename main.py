@@ -15,10 +15,10 @@ from discord import colour
 
 os.system('cls')
 
-with open('birth.json','r',encoding='cp950') as birthF:
+with open('birth.json','r',encoding='utf-8') as birthF:
     birthData=json.load(birthF)
 
-with open('config.json','r',encoding='cp950') as configF:
+with open('config.json','r',encoding='utf-8') as configF:
     configData=json.load(configF)
 
 client = discord.Client()
@@ -58,7 +58,7 @@ async def on_message(message):
         await guild.create_role(name="commander")
         role=discord.utils.get(user.guild.roles, name="commander")
         member=message.author
-        with open('config.json','r',encoding='cp950') as configF:
+        with open('config.json','r',encoding='utf-8') as configF:
             configData=json.load(configF)
         category=client.get_channel(int(configData['cmdCatergory']))
         try:
@@ -73,11 +73,11 @@ async def on_message(message):
 @tasks.loop(seconds=60)
 async def birthdatCelebrations():
     await client.wait_until_ready()
-    with open('birth.json','r',encoding='cp950') as birthF:
+    with open('birth.json','r',encoding='utf-8') as birthF:
         birthData=json.load(birthF)
-    with open('config.json','r',encoding='cp950') as configF:
+    with open('config.json','r',encoding='utf-8') as configF:
         configData=json.load(configF)
-    with open('birthWishes.json','r',encoding='cp950') as bWF:
+    with open('birthWishes.json','r',encoding='utf-8') as bWF:
         birthWData=json.load(bWF)
     length=len(birthWData)
     wishes=birthWData[str(random.randint(0,length*10000)%length)]
